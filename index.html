@@ -4,63 +4,10 @@
     <head>
         <meta charset="UTF-8" />
         <title>jgking.dev</title>
-        <style>
-            * {
-                /* border: 1px solid red; */
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                height: 100vh;
-                background: #1e1e1e;
-                color: #00ff88;
-                font-family: "Fira Mono", monospace;
-
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 1em;
-            }
-
-            .tui-frame {
-                background: #000;
-                padding: 1em;
-                white-space: pre-wrap;
-                font-size: 16px;
-                line-height: 1.2em;
-                border: 2px solid #00ff88;
-                box-shadow: 0 0 10px #00ff8840;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <!-- prettier-ignore -->
-        <div class="tui-frame">
-<pre>
-    __                               _____  _           
- __|  | ___  ___  ___  _____  _ _   |  |  ||_| ___  ___ 
-|  |  || -_||  _|| -_||     || | |  |    -|| ||   || . |
-|_____||___||_|  |___||_|_|_||_  |  |__|__||_||_|_||_  |
-                             |___|                 |___|
-</pre>
-</div>
-
-        <!-- prettier-ignore -->
-        <div class="tui-frame">
-╔════════════════════════════════╗
-║     Welcome to jgking.dev!     ║
-╠════════════════════════════════╣
-║ Hiyo! I'm Jeremy King. I'm a   ║
-║ game developer and computer    ║
-║ scientist with a passion       ║
-║ for indie games.               ║
-║                                ║
-║ [1] About Me                   ║
-║ [2] Projects                   ║
-║ [3] Contact                    ║
-╚════════════════════════════════╝
-</div>
+        <div id="ascii-container"></div>
+        <script src="main.js"></script>
     </body>
 </html>
