@@ -2,16 +2,27 @@
     /* border: 1px solid red; */
 }
 
-body {
+:root {
+    --bg: #1e1e1e;
+    --fg: #00ff88;
+    --dim-fg: #666;
+    --pre-fg: #ccc;
+}
+
+body,
+#ascii-container {
     margin: 0;
     padding: 0;
-    background: #1e1e1e;
-    color: #00ff88;
+    background: var(--bg);
+    color: var(--fg);
     font-family: monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+body {
     height: 100vh;
     gap: 2em;
 }
@@ -23,7 +34,13 @@ pre {
     white-space: pre;
     font-size: 16px;
     line-height: 1.2em;
+    text-align: left;
+    margin: 0 auto;
     max-width: 90vw;
     overflow-x: auto;
-    margin: auto;
+    color: var(--fg);
+}
+
+.line-number {
+    color: var(--dim-fg);
 }

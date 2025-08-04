@@ -1,5 +1,6 @@
 // --- Configurable Options ---
 const USE_UNIFORM_WIDTH = true; // toggle for same-width boxes or not
+const SHOW_LINE_NUMBERS = true;
 const WRAP_WIDTH_PERCENT = 0.6; // percent of viewport width
 
 const sections = [
@@ -46,24 +47,6 @@ const sections = [
 ];
 
 // --- Utility Functions ---
-function wrapText(text, maxWidth) {
-    if (text.trim() === "") return [""]; // Preserve empty lines
-    const words = text.split(" ");
-    const lines = [];
-    let currentLine = "";
-
-    for (let word of words) {
-        if ((currentLine + word).length + 1 <= maxWidth) {
-            currentLine += (currentLine ? " " : "") + word;
-        } else {
-            lines.push(currentLine);
-            currentLine = word;
-        }
-    }
-    if (currentLine) lines.push(currentLine);
-    return lines;
-}
-
 function getCharWidth() {
     const span = document.createElement("span");
     span.style.visibility = "hidden";
@@ -82,51 +65,90 @@ function getWrapWidthInChars(percent = 0.6) {
     return Math.floor(viewportWidth / charWidth);
 }
 
-function makeAsciiBox(lines, widthOverride = null, centerText = false) {
+function wrapText(text, maxWidth) {
+    if (text.trim() === "") return [""]; // Preserve empty lines
+
+    const words = text.split(" ");
+    const lines = [];
+    let currentLine = "";
+
+    for (let word of words) {
+        if ((currentLine + word).length + 1 <= maxWidth) {
+            currentLine += (currentLine ? " " : "") + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+    }
+    if (currentLine) lines.push(currentLine);
+    return lines;
+}
+
+function makeAsciiBoxWithLineNumbers(
+    lines,
+    widthOverride = null,
+    centerText = false,
+    startLineNumber = 1
+) {
     const contentWidth =
         widthOverride ?? Math.max(...lines.map((line) => line.length));
-    const top = "╔" + "═".repeat(contentWidth + 2) + "╗";
-    const bottom = "╚" + "═".repeat(contentWidth + 2) + "╝";
+    const gutterWidth = SHOW_LINE_NUMBERS
+        ? String(startLineNumber + lines.length + 1).length
+        : 0;
 
-    const boxed = lines.map((line) => {
-        if (centerText) {
-            const padTotal = contentWidth - line.length;
-            const padLeft = Math.floor(padTotal / 2);
-            const padRight = padTotal - padLeft;
-            return `║ ${" ".repeat(padLeft)}${line}${" ".repeat(padRight)} ║`;
-        } else {
-            const padded = line.padEnd(contentWidth, " ");
-            return `║ ${padded} ║`;
-        }
+    const padLineNum = (n) => String(n).padStart(gutterWidth, " ");
+    const gutter = (n) =>
+        SHOW_LINE_NUMBERS
+            ? `<span class=\"line-number\">${padLineNum(n)}</span> `
+            : "";
+
+    const top = `${gutter(startLineNumber - 1)}╔${"═".repeat(
+        contentWidth + 2
+    )}╗`;
+    const bottom = `${gutter(startLineNumber + lines.length)}╚${"═".repeat(
+        contentWidth + 2
+    )}╝`;
+
+    const boxed = lines.map((line, i) => {
+        const padded = centerText
+            ? " ".repeat(Math.floor((contentWidth - line.length) / 2)) +
+              line +
+              " ".repeat(Math.ceil((contentWidth - line.length) / 2))
+            : line.padEnd(contentWidth, " ");
+        return `${gutter(startLineNumber + i)}║ ${padded} ║`;
     });
 
     return [top, ...boxed, bottom].join("\n");
 }
 
-// --- Main Render Logic ---
 function renderAsciiBoxes(containerId, sections, uniform = false) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
 
-    const wrapLimit = getWrapWidthInChars(WRAP_WIDTH_PERCENT);
+    const wrapWidth = getWrapWidthInChars(0.6);
+    let currentLineNumber = 1;
 
-    // Wrap all sections and track center settings
     const wrappedSections = sections.map((section) => {
         const lines = section.lines.flatMap((line) =>
-            wrapText(line, wrapLimit)
+            wrapText(line, wrapWidth)
         );
         return { lines, centerText: section.centerText };
     });
 
-    // Always calculate the global max width
     const maxWidth = Math.max(
         ...wrappedSections.flatMap((s) => s.lines.map((l) => l.length))
     );
 
     wrappedSections.forEach(({ lines, centerText }) => {
         const pre = document.createElement("pre");
-        pre.textContent = makeAsciiBox(lines, maxWidth, centerText);
+        pre.innerHTML = makeAsciiBoxWithLineNumbers(
+            lines,
+            USE_UNIFORM_WIDTH ? maxWidth : null,
+            centerText,
+            currentLineNumber
+        );
         container.appendChild(pre);
+        currentLineNumber += lines.length + 2;
     });
 }
 
