@@ -21,7 +21,7 @@ const sections = [
         lines: [
             "Welcome to jgking.dev!",
             "",
-            "Hiyo! My name is Jeremy King. I'm a game developer and computer scientist with an immense passion for indie games.",
+            "Hiyo! My name is Jeremy King. I'm a game developer and computer scientist with an immense passion for indie games. I'm still in the process of improving and adding content to this site, so check back often!",
             "",
             "[1] About Me",
             "[2] Projects",

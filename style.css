@@ -6,7 +6,6 @@
     --bg: #1e1e1e;
     --fg: #00ff88;
     --dim-fg: #666;
-    --pre-fg: #ccc;
 }
 
 body,
@@ -20,6 +19,7 @@ body,
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    line-height: 1.2em;
 }
 
 body {
@@ -27,10 +27,8 @@ body {
     gap: 2em;
 }
 
-/* pre {
-    background: #000;
-    padding: 1em;
-    box-shadow: 0 0 10px #00ff8840;
+/* unsure what this selector is changing but too afraid to remove it */
+.ascii-box {
     white-space: pre;
     font-size: 16px;
     line-height: 1.2em;
@@ -39,7 +37,7 @@ body {
     max-width: 90vw;
     overflow-x: auto;
     color: var(--fg);
-} */
+}
 
 .line-number {
     color: var(--dim-fg);
