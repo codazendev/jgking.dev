@@ -18,7 +18,12 @@ body {
 
 pre {
     background: #000;
+    padding: 1em;
     box-shadow: 0 0 10px #00ff8840;
+    white-space: pre;
     font-size: 16px;
     line-height: 1.2em;
+    max-width: 90vw;
+    overflow-x: auto;
+    margin: auto;
 }
