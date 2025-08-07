@@ -4,37 +4,35 @@
     --dim-fg: #666;
 }
 
-body,
-#ascii-container {
+body {
+    background-color: var(--bg);
     margin: 0;
     padding: 0;
-    background: var(--bg);
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+#ascii-container {
     color: var(--fg);
     font-family: monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    line-height: 1.2em;
-}
-
-body {
-    height: 100vh;
-    gap: 2em;
-}
-
-/* unsure what this selector is changing but too afraid to remove it */
-.ascii-box {
-    white-space: pre;
-    font-size: 16px;
-    line-height: 1.2em;
-    text-align: left;
-    margin: 0 auto;
-    max-width: 90vw;
-    overflow-x: auto;
-    color: var(--fg);
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+    width: 100%;
+    line-height: 1.5em;
+    box-sizing: border-box;
 }
 
 .line-number {
     color: var(--dim-fg);
+}
+
+a {
+    color: #00ff88;
+}
+
+a:hover {
+    color: orange;
 }

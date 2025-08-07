@@ -44,29 +44,31 @@ const sections = [
             "Welcome to jgking.dev!",
             "",
             "Hiyo! My name is Jeremy King. I'm a game developer and computer scientist with an immense passion for indie games. I'm still in the process of improving and adding content to this site, so check back often!",
-            "",
-            "[1] About Me",
-            "[2] Projects",
-            "[3] Contact",
         ],
         centerText: false,
     },
     // site description ascii-box
     {
         lines: [
-            "This website is a minimal TUI-inspired space for showcasing my work in game development, system programming, and creative tools. I lean into retro aesthetics and full control over layout. You're looking at HTML and CSS doing ncurses cosplay.",
+            "As you can probably tell, I am a fanatic of simple layouts, monospaced fonts, clean interfaces, and minimal color schemes.",
+            "",
+            "Mainly, though, I am a huge nerd for indie games! Some of my favorites are Enter the Gungeon, Baba Is You, Hollow Knight, Lingo, and so many more I wish I had the space to list.",
+            "",
+            "Oh wait, I do! I also love Hyper Light Drifter, Noita, Celeste, Dead Cells, Balatro, Risk of Rain 2, Slay the Spire, UFO 50, Oxygen Not Included, Tunic, Terraria, Peak, Animal Well... wait, are you still reading?",
+            "",
+            "For some more boring stuff, I enjoy skipping rocks at the beach, biking on local rail trails, reading (especially spy thrillers), the color of leaves in the fall, and reminding myself this is a website and not a Hinge profile.",
         ],
-        centerText: true,
+        centerText: false,
     },
-    // aesthetic/flavor system status ascii-box
+    // contact info ascii-box
     {
         lines: [
-            "System Status:",
-            "All services operational.",
-            "Last deployment: 2025-08-03",
-            "[R] Reboot  [Q] Quit",
+            "Contact Me!",
+            "Email:         jeremykingdev@gmail.com",
+            "LinkedIn:      https://linkedin.com/in/jeremygking",
+            "itch.io:       https://codazen.itch.io",
         ],
-        centerText: true,
+        centerText: false,
     },
 ];
 
@@ -144,6 +146,29 @@ function getResponsiveHeader(maxWidth) {
     return headers.base;
 }
 
+function linkifyText(text) {
+    const urlRegex = /https?:\/\/[^\s]+/g;
+    const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b/gi;
+
+    // Replace URLs
+    text = text.replace(urlRegex, (url) => {
+        let displayUrl = url.replace(/^https?:\/\//, ""); // Strip protocol
+        return `<a href="${url}" target="_blank" rel="noopener" class="link">${displayUrl}</a>        `;
+    });
+
+    // Replace email addresses
+    text = text.replace(emailRegex, (email) => {
+        return `<a href="mailto:${email}" class="link">${email}</a>`;
+    });
+
+    return text;
+}
+
+function visibleLength(line) {
+    // Remove https:// or http:// for width calculation only
+    return line.replace(/^https?:\/\//, "").length;
+}
+
 // take a set of lines and construct a set of spans to represent them with a line gutter and an ASCII border
 function makeAsciiBoxWithLineNumbers(
     lines, // the content to make an ascii-box for
@@ -151,9 +176,12 @@ function makeAsciiBoxWithLineNumbers(
     centerText = false, // whether the content should be centered within the ascii-box (manually manufacture equal number of spaces on left and right)
     startLineNumber = 1
 ) {
-    let contentWidth =
-        widthOverride ?? Math.max(...lines.map((line) => line.length));
+    const visibleLengths = lines.map((line) => visibleLength(line));
+    let contentWidth = widthOverride ?? Math.max(...visibleLengths);
+
+    // ensure that the content resizes by twos
     if (contentWidth % 2 !== 0) contentWidth += 1;
+
     const gutterWidth = SHOW_LINE_NUMBERS
         ? String(startLineNumber + lines.length + 1).length
         : 0;
@@ -171,16 +199,21 @@ function makeAsciiBoxWithLineNumbers(
         contentWidth + 2
     )}╝`;
 
-    const boxed = lines.map((line, i) => {
-        const padded = centerText
-            ? " ".repeat(Math.floor((contentWidth - line.length) / 2)) +
-              line +
-              " ".repeat(Math.ceil((contentWidth - line.length) / 2))
-            : line.padEnd(contentWidth, " ");
-        return `${gutter(startLineNumber + i)}║ ${padded} ║`;
+    const boxedLines = lines.map((line, i) => {
+        const visLen = visibleLengths[i];
+        const padLen = contentWidth - visLen;
+        const leftPad = centerText ? Math.floor(padLen / 2) : 0;
+        const rightPad = padLen - leftPad;
+        const paddedLine =
+            " ".repeat(leftPad) +
+            line.replace(/^https?:\/\//, "") +
+            " ".repeat(rightPad);
+
+        // Linkify AFTER padding the visible text
+        return `${gutter(startLineNumber + i)}║ ${linkifyText(paddedLine)} ║`;
     });
 
-    return [top, ...boxed, bottom].join("\n");
+    return [top, ...boxedLines, bottom].join("\n");
 }
 
 // add a set of constructed ascii-boxes to a document for rendering and viewing by the user
