@@ -10,9 +10,12 @@ li {
     color: #0000cc;
 }
 
-.navbar {
+.center {
     text-align: center;
-    display: inline-block;
     margin: auto;
     width: 100%;
+}
+
+.navbar {
+    display: inline-block;
 }
