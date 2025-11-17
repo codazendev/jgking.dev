@@ -1,38 +1,11 @@
-:root {
-    --bg: #1e1e1e;
-    --fg: #00ff88;
-    --dim-fg: #666;
+h1 {
+    color: #cc0000;
 }
 
-body {
-    background-color: var(--bg);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow-y: auto;
+p {
+    color: #00cc00;
 }
 
-#ascii-container {
-    color: var(--fg);
-    font-family: monospace;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 15vh;
-    padding-bottom: 15vh;
-    width: 100%;
-    line-height: 1.5em;
-    box-sizing: border-box;
-}
-
-.line-number {
-    color: var(--dim-fg);
-}
-
-a {
-    color: #00ff88;
-}
-
-a:hover {
-    color: orange;
+li {
+    color: #0000cc;
 }
