@@ -9,3 +9,10 @@ p {
 li {
     color: #0000cc;
 }
+
+.navbar {
+    text-align: center;
+    display: inline-block;
+    margin: auto;
+    width: 100%;
+}
