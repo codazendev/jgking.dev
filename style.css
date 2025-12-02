@@ -34,12 +34,9 @@
 
 body {
     background-color: var(--bg);
-    border: 1px solid red;
-}
-
-.header {
-    border: 1px solid blue;
-    /* padding: 1em; */
+    /* border: 1px solid red; */
+    max-width: 1024px;
+    margin: 2rem auto;
 }
 
 .center {
