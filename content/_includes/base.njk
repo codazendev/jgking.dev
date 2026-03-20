@@ -2,37 +2,31 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{{ title }}{% if title !== "jgking.dev" %} | jgking.dev{% endif %}</title>
+        <title>{{ title }}{% if title !== "Jeremy King" %} | Jeremy King{% endif %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Website of Jeremy King">
         <link rel="favicon" href="">
         <link rel="stylesheet" href="/assets/css/base.css">
     </head>
     <body>
-        <nav class="box">
-            <p>Navigation</p>
-            <ul id="navlist">
-                <li><a href="/">Home</a></li>
-                <li><a href="/links/">Links</a></li>
-                <li><a href="/todo/">Todo</a></li>
-                <li><a href="/sitemap/">Sitemap</a></li>
-            </ul>
+        <nav>
+            <a href="/">Jeremy King</a>
+            <a href="/links/">Links</a>
+            <a href="/todo/">Todo</a>
+            <a href="/sitemap/">Sitemap</a>
         </nav>
-        
-        <div id="content">
-            <aside class="box" id="sidebar">
-                <p>Sidebar</p>
-                TBD
-            </aside>
 
-            <main class="box">
-                <p>Main</p>
-                {{ content | safe }}
-            </main>
-        </div>
+        <header class="box">
+            <h1>Header</h1>
+        </header>
+        
+        <main class="box">
+            <h1>Main</h1>
+            {{ content | safe }}
+        </main>
 
         <footer class="box">
-        <p>Footer</p>
+        <h1>Footer</h1>
             TBD
         </footer>
     </body>
