@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "Jeremy King",
+    "url": "https://jgking.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.j:jgkingdev/jgking.dev"
+  },
+  "name": "jgking.dev",
+  "description": "Website of Jeremy King",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "sass": "^1.97.3",
+    "typescript": "^5.9.3"
+  }
+}

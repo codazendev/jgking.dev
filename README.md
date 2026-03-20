@@ -1,2 +1,2 @@
 # jgking.dev
-files for my other website, jgking.dev
+files for my website, jgking.dev

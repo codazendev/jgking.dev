@@ -1,0 +1,12 @@
+@font-face {
+    font-family: AdwaitaMono;
+    src: url(./fonts/AdwaitaMono-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: AdwaitaMono;
+    margin: auto;
+    width: fit-content;
+}

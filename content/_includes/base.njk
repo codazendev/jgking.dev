@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ title }}{% if title !== "jgking.dev" %} | jgking.dev{% endif %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Website of Jeremy King">
+        <link rel="favicon" href="">
+        <link rel="stylesheet" href="/assets/css/base.css">
+    </head>
+    <body>
+        <nav class="box">
+            <p>Navigation</p>
+            <ul id="navlist">
+                <li><a href="/">Home</a></li>
+                <li><a href="/links/">Links</a></li>
+                <li><a href="/todo/">Todo</a></li>
+                <li><a href="/sitemap/">Sitemap</a></li>
+            </ul>
+        </nav>
+        
+        <div id="content">
+            <aside class="box" id="sidebar">
+                <p>Sidebar</p>
+                TBD
+            </aside>
+
+            <main class="box">
+                <p>Main</p>
+                {{ content | safe }}
+            </main>
+        </div>
+
+        <footer class="box">
+        <p>Footer</p>
+            TBD
+        </footer>
+    </body>
+</html>
