@@ -85,9 +85,14 @@ nav .inner {
 }
 
 .active {
-    
+    background: var(--dark);
 }
 
+nav .links a:hover, nav .links a.active {
+    color: var(--dark);
+}
+
+/* --- Page Elements --- */
 .box {
     margin: 1rem 0;
     padding: 1rem;
@@ -95,6 +100,7 @@ nav .inner {
     border: 0.1rem solid var(--light);
 }
 
+/* --- Links --- */
 a {
     color: var(--light);
 }

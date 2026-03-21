@@ -11,15 +11,15 @@
     <body>
         <nav>
             <div class="inner">
-                <a class="logo" href="#">
+                <a class="logo" href="/">
                     Jeremy
                     <span>King</span>
                 </a>
                 <div class="links">
-                    <a href="/projects/">Projects</a>
-                    <a href="/links/">Links</a>
-                    <a href="/todo/">Todo</a>
-                    <a href="/sitemap/">Sitemap</a>
+                    <a {% if page.url == "/projects/"%}class="active"{% endif %}href="/projects/">Projects</a>
+                    <a {% if page.url == "/links/"%}class="active"{% endif %}href="/links/">Links</a>
+                    <a {% if page.url == "/todo/"%}class="active"{% endif %}href="/todo/">Todo</a>
+                    <a {% if page.url == "/sitemap/"%}class="active"{% endif %}href="/sitemap/">Sitemap</a>
                 </div>
             </div>
         </nav>
