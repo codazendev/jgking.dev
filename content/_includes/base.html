@@ -10,20 +10,21 @@
     </head>
     <body>
         <nav>
-            <a href="/">Jeremy King</a>
-            <a href="/links/">Links</a>
-            <a href="/todo/">Todo</a>
-            <a href="/sitemap/">Sitemap</a>
+            <div class="inner">
+                <a class="logo" href="#">
+                    Jeremy
+                    <span>King</span>
+                </a>
+                <div class="links">
+                    <a href="/projects/">Projects</a>
+                    <a href="/links/">Links</a>
+                    <a href="/todo/">Todo</a>
+                    <a href="/sitemap/">Sitemap</a>
+                </div>
+            </div>
         </nav>
-
-        <header class="box">
-            <h1>Header</h1>
-        </header>
         
-        <main class="box">
-            <h1>Main</h1>
-            {{ content | safe }}
-        </main>
+        {{ content | safe }}
 
         <footer class="box">
         <h1>Footer</h1>

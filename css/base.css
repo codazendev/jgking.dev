@@ -1,3 +1,4 @@
+/* --- Fonts --- */
 @font-face {
     font-family: AdwaitaMono;
     src: url(./fonts/AdwaitaMono-Regular.ttf);
@@ -26,12 +27,17 @@
     font-style: italic;
 }
 
+/* --- Base Overrides --- */
 *, *::before, *::after {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 :root {
     min-height: 100%;
+
+    /* Site Colors */
     --dark: oklch(0.248 0.011 176.243);
     --light: oklch(0.966 0.023 95.96);
     --content: oklch(0.504 0.11 305.869);
@@ -49,11 +55,37 @@ body {
     background: var(--dark);
 }
 
+/* --- Navigation --- */
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem 0;
+    background: var(--content);
+    border-bottom: 1px solid var(--light);
+}
+
+nav .inner {
+    max-width: 1024px;
+    margin: auto;
     display: flex;
-    justify-content: space-around;
-    padding: 2rem 0;
-    background-color: var(--content);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+
+}
+
+.links {
+    display: flex;
+    gap: 1rem;
+}
+
+.active {
+    
 }
 
 .box {
