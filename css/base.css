@@ -50,26 +50,25 @@ html {
 
 body {
     margin: 0 auto;
-    width: min(1024px, 80%);
+    /* width: min(1024px, 80%); */
     color: var(--light);
     background: var(--dark);
 }
 
+/* --- Page Width --- */
+nav .inner, .page {
+    max-width: min(1024px, 80%);
+    margin: 0 auto;
+}
+
 /* --- Navigation --- */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
     padding: 1rem 0;
     background: var(--content);
-    border-bottom: 1px solid var(--light);
+    border-bottom: 0.1rem solid var(--light);
 }
 
 nav .inner {
-    max-width: 1024px;
-    margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
